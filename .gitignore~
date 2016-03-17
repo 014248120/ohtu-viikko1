@@ -1,4 +1,6 @@
 *tmp
 target
+EOF
+:q
 *.zip
 EOF
