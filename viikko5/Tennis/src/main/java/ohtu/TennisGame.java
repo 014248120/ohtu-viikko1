@@ -17,61 +17,40 @@ public class TennisGame {
     public void wonPoint(String playerName) {
         if (playerName.equals(player1Name))
             player1Score++;
-        else
+        else if (playerName.equals(player2Name))
             player2Score++;
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
         if (player1Score==player2Score) return evenScore(player1Score);
-        else if (player1Score>=4 || player2Score>=4)
-        {
-            int minusResult = player1Score-player2Score;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+        else if (player1Score>=4 && player1Score>player2Score) return endGameScore(player1Name, player1Score-player2Score);
+        else if (player2Score>=4 && player2Score>player1Score) return endGameScore(player2Name, player2Score-player1Score);
+        else return regularScore();
+    }
+    
+    private String endGameScore(String gameLeader, int lead) {
+        switch (lead) {
+            case 1: return "Advantage " + gameLeader;
+            default: return "Win for " + gameLeader;
         }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = player1Score;
-                else { score+="-"; tempScore = player2Score;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
-        }
-        return score;
     }
     
     private String evenScore(int commonScore) {
-        switch (commonScore)
-            {
-                case 0:
-                    return "Love-All";
-                case 1:
-                    return "Fifteen-All";
-                case 2:
-                    return "Thirty-All";
-                case 3:
-                    return "Forty-All";
-                default:
-                    return "Deuce";
-            }
+        if (commonScore < 4) return score(commonScore) + "-All";
+        else return "Deuce";
     }
+    
+    private String regularScore() {
+        return score(player1Score) + "-" + score(player2Score);
+    }
+    
+    private String score(int score) {
+        switch(score) {
+            case 0: return "Love";
+            case 1: return "Fifteen";
+            case 2: return "Thirty";
+            default: return "Forty";
+        }
+    }
+    
 }
