@@ -1,17 +1,17 @@
 
 package ohtu.intjoukkosovellus;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 
 public class IntJoukko {
     
-    private final HashSet<Integer> joukko;
+    private final TreeSet<Integer> joukko;
     
     public IntJoukko() {
-        this.joukko = new HashSet<>();
+        this.joukko = new TreeSet<>();
     }
     
-    public IntJoukko(HashSet<Integer> joukko) {
+    public IntJoukko(TreeSet<Integer> joukko) {
         this.joukko = joukko;
     }
     
@@ -38,7 +38,7 @@ public class IntJoukko {
             alkiot += i + ",";
         }
         
-        alkiot = (String)alkiot.subSequence(0, alkiot.length()-1);
+        if (alkiot.length()>0) alkiot = (String)alkiot.subSequence(0, alkiot.length()-1);
         return "{" + alkiot + "}";
     }
    
@@ -76,8 +76,17 @@ public class IntJoukko {
         return x;
     }
 
-    private HashSet<Integer> getJoukko() {
+    private TreeSet<Integer> getJoukko() {
         return this.joukko;
+    }
+    
+    public int[] toIntArray() {
+        int [] ret = new int[joukko.size()];
+        int c = 0;
+        for (int i : this.joukko) {
+            ret[c++]=i;
+        }
+        return ret;
     }
         
 }

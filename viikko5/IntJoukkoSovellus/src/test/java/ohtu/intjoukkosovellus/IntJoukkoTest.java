@@ -43,18 +43,6 @@ public class IntJoukkoTest {
         assertEquals(1, joukko.mahtavuus());
     }
     
-    @Test
-    public void palautetaanOikeaTaulukko() {
-        int[] odotettu = {3, 55, 99};
-        
-        joukko.lisaa(55);
-        joukko.poista(10);
-        joukko.lisaa(99);
-
-        int[] vastaus = joukko.toIntArray();
-        Arrays.sort(vastaus);
-        assertArrayEquals(odotettu, vastaus);
-    }
     
     
     @Test
@@ -72,7 +60,7 @@ public class IntJoukkoTest {
     
     @Test
     public void toStringToimii(){
-        assertEquals("{10, 3}", joukko.toString());
+        assertEquals("{3,10}", joukko.toString());
     }
     
     @Test

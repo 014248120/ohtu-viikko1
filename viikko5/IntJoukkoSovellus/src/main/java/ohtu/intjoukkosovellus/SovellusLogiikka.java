@@ -21,10 +21,12 @@ public class SovellusLogiikka {
     }
     
     public IntJoukko getJoukko(String joukko) {
-        if (joukko.equals("A")) return A;
-        else if (joukko.equals("B")) return B;
-        else if (joukko.equals("C"))return C;
-        else return null;
+        switch (joukko) {
+            case "A": return A;
+            case "B": return B;
+            case "C": return C;
+            default: return null;
+        }
     }
     
     public void lisaa(String joukko, int luku) {
@@ -45,6 +47,10 @@ public class SovellusLogiikka {
     
     public void poista(String joukko, int luku) {
         getJoukko(joukko).poista(luku);
+    }
+    
+    public boolean sisaltyy(String joukko, int luku) {
+        return getJoukko(joukko).kuuluu(luku);
     }
     
 }
